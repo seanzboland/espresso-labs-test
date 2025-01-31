@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface Agent {
+export interface Agent {
   id: number;
   name: string;
   email: string;
@@ -8,7 +8,7 @@ interface Agent {
   lastSeen: string;
 }
 
-interface AgentContextType {
+export interface AgentContextType {
   agents: Agent[];
   addAgent: (agent: Omit<Agent, "id" | "lastSeen">) => void;
   updateAgent: (id: number, updatedAgent: Omit<Agent, "id" | "lastSeen">) => void;
@@ -17,8 +17,8 @@ interface AgentContextType {
 
 const AgentContext = createContext<AgentContextType | undefined>(undefined);
 
-export const AgentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [agents, setAgents] = useState<Agent[]>(JSON.parse(localStorage.getItem("agents") || "[]"));
+export const AgentProvider: React.FC<{ children: React.ReactNode, initialAgents?: Agent[] }> = ({ children, initialAgents }) => {
+  const [agents, setAgents] = useState<Agent[]>(initialAgents || []);
 
   useEffect(() => {
     localStorage.setItem("agents", JSON.stringify(agents));
