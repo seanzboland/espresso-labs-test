@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Agent, AgentProvider, useAgents } from "../AgentContext";
+import { AgentProvider, useAgents } from "../AgentContext";
 
 const TestComponent = () => {
   const { agents } = useAgents();
