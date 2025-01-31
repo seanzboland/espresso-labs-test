@@ -15,12 +15,14 @@ const TestComponent = () => {
 
 describe("AgentContext", () => {
   it("provides the initial agents", () => {
-    const agents: Agent[] = [
+    const mockAgents = [
       { id: 1, name: "John Doe", email: "john@example.com", status: "Active", lastSeen: "2023-10-01" },
     ];
 
+    jest.spyOn(Storage.prototype, "getItem").mockReturnValueOnce(JSON.stringify(mockAgents));
+
     render(
-      <AgentProvider initialAgents={agents}>
+      <AgentProvider>
         <TestComponent />
       </AgentProvider>
     );

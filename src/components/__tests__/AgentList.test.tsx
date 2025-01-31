@@ -19,13 +19,15 @@ describe("AgentList Component", () => {
   });
 
   it("displays agents in the list", () => {
-    const agents = [
+    const mockAgents = [
       { id: 1, name: "John Doe", email: "john@example.com", status: "Active", lastSeen: "2023-10-01" },
     ];
 
+    jest.spyOn(Storage.prototype, "getItem").mockReturnValueOnce(JSON.stringify(mockAgents));
+
     render(
       <Router>
-        <AgentProvider initialAgents={agents}>
+        <AgentProvider>
           <AgentList />
         </AgentProvider>
       </Router>

@@ -17,8 +17,8 @@ export interface AgentContextType {
 
 const AgentContext = createContext<AgentContextType | undefined>(undefined);
 
-export const AgentProvider: React.FC<{ children: React.ReactNode, initialAgents?: Agent[] }> = ({ children, initialAgents }) => {
-  const [agents, setAgents] = useState<Agent[]>(initialAgents || []);
+export const AgentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [agents, setAgents] = useState<Agent[]>(JSON.parse(localStorage.getItem("agents") || "[]"));
 
   useEffect(() => {
     localStorage.setItem("agents", JSON.stringify(agents));

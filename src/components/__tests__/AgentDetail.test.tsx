@@ -6,11 +6,15 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 describe("AgentDetail Component", () => {
   it("renders the agent details", () => {
-    const agent = { id: 1, name: "John Doe", email: "john@example.com", status: "Active", lastSeen: "2023-10-01" };
+    const mockAgents = [
+      { id: 1, name: "John Doe", email: "john@example.com", status: "Active", lastSeen: "2023-10-01" },
+    ];
+
+    jest.spyOn(Storage.prototype, "getItem").mockReturnValueOnce(JSON.stringify(mockAgents));
 
     render(
       <Router>
-        <AgentProvider initialAgents={[agent]}>
+        <AgentProvider>
           <Routes>
             <Route path="/agent/:id" element={<AgentDetail />} />
           </Routes>
